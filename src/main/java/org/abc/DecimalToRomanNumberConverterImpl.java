@@ -2,7 +2,6 @@ package org.abc;
 
 /**
  * This class implements the NumberConverter interface to convert decimal numbers to Roman numerals.
- *
  */
 public class DecimalToRomanNumberConverterImpl implements NumberConverter<Integer, String> {
 

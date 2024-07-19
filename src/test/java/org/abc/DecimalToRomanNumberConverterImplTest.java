@@ -14,7 +14,7 @@ class DecimalToRomanNumberConverterImplTest {
         for (int i = 0; i < DecimalToRomanNumberConverterImpl.DECIMALS.length; i++) {
             String actual = decimalToRomanNumberConverter.convert(DecimalToRomanNumberConverterImpl.DECIMALS[i]);
 
-            assertEquals(actual,DecimalToRomanNumberConverterImpl.ROMAN_NUMERALS[i]);
+            assertEquals(actual, DecimalToRomanNumberConverterImpl.ROMAN_NUMERALS[i]);
         }
     }
 
@@ -22,49 +22,49 @@ class DecimalToRomanNumberConverterImplTest {
     public void convert_SingleDigit_Correct() {
         String actual = decimalToRomanNumberConverter.convert(1);
 
-        assertEquals(actual,"I");
+        assertEquals(actual, "I");
     }
 
     @Test
     void convert_SingleDigit_Incorrect() {
         String actual = decimalToRomanNumberConverter.convert(2);
 
-        assertNotEquals(actual,"2");
+        assertNotEquals(actual, "2");
     }
 
     @Test
     void convert_SingleDigitSpecialDecimal_Correct() {
         String actual = decimalToRomanNumberConverter.convert(4);
 
-        assertEquals(actual,"IV");
+        assertEquals(actual, "IV");
     }
 
     @Test
     void convert_SingleDigitSpecialDecimal_Incorrect() {
         String actual = decimalToRomanNumberConverter.convert(5);
 
-        assertNotEquals(actual,"IIIII");
+        assertNotEquals(actual, "IIIII");
     }
 
     @Test
     void convert_LongDecimal_Correct() {
         String actual = decimalToRomanNumberConverter.convert(3514);
 
-        assertEquals(actual,"MMMDXIV");
+        assertEquals(actual, "MMMDXIV");
     }
 
     @Test
     void convert_LongDecimal_Incorrect() {
         String actual = decimalToRomanNumberConverter.convert(3000);
 
-        assertNotEquals(actual,"3000");
+        assertNotEquals(actual, "3000");
     }
 
     @Test
     void convert_MaxDecimal_Correct() {
         String actual = decimalToRomanNumberConverter.convert(3999);
 
-        assertEquals(actual,"MMMCMXCIX");
+        assertEquals(actual, "MMMCMXCIX");
     }
 
     @Test
