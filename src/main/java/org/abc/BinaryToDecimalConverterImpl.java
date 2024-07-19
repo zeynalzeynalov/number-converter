@@ -50,7 +50,7 @@ public class BinaryToDecimalConverterImpl implements NumberConverter<String, Int
             }
         }
 
-        if(source.length() > 1 && source.charAt(0) == '0') {
+        if (source.length() > 1 && source.charAt(0) == '0') {
             throw new IllegalArgumentException("Input can not start with 0.");
         }
 
