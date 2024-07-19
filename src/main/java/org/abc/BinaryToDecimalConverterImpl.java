@@ -40,7 +40,7 @@ public class BinaryToDecimalConverterImpl implements NumberConverter<String, Int
             throw new IllegalArgumentException("Input cannot be null or empty.");
         }
 
-        if (source.trim().length() > 31) {
+        if (source.trim().length() >= 32) {
             throw new IllegalArgumentException("Input length must be less than 32.");
         }
 
@@ -48,6 +48,10 @@ public class BinaryToDecimalConverterImpl implements NumberConverter<String, Int
             if (currentChar != '0' && currentChar != '1') {
                 throw new IllegalArgumentException("Input must be a valid binary string.");
             }
+        }
+
+        if(source.length() > 1 && source.charAt(0) == '0') {
+            throw new IllegalArgumentException("Input can not start with 0.");
         }
 
         return true;

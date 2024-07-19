@@ -52,6 +52,18 @@ class BinaryToDecimalConverterImplTest {
     }
 
     @Test
+    void isValid_StartsWithZero_ThrowsException() {
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            binaryToDecimalConverter.convert("0101");
+        });
+
+        String expectedMessage = "Input can not start with 0.";
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+
+    @Test
     public void convert_Zero_Correct() {
         Integer actual = binaryToDecimalConverter.convert("0");
 
