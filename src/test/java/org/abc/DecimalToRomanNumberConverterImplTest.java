@@ -97,7 +97,7 @@ class DecimalToRomanNumberConverterImplTest {
             decimalToRomanNumberConverter.convert(4000);
         });
 
-        String expectedMessage = "Input must be a positive integer less than 3999.";
+        String expectedMessage = "Input must be a positive integer less than 4000.";
         String actualMessage = exception.getMessage();
 
         assertTrue(actualMessage.contains(expectedMessage));
