@@ -1,5 +1,7 @@
 package org.abc;
 
-public interface NumberConverter<T, V> {
-    V convert(T source);
+public interface NumberConverter<S, T> {
+    T convert(S source);
+
+    boolean isValid(S source) throws IllegalArgumentException;
 }

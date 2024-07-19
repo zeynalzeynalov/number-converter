@@ -10,34 +10,47 @@ public class DecimalToRomanNumberConverterImpl implements NumberConverter<Intege
 
     /**
      * Converts a decimal number to its Roman numeral representation.
-     * The largest number that can be represented in this manner is 3,999 (MMMCMXCIX)
      * Reference: https://en.wikipedia.org/wiki/Roman_numerals#Standard_form
      *
      * @param source the decimal number to be converted
      * @return the Roman numeral representation of the given decimal number
+     * @throws IllegalArgumentException if the input is not a valid positive integer less than 4000
      */
     @Override
     public String convert(Integer source) {
-        if (source == null || source <= 0) {
-            throw new IllegalArgumentException("Input must be a positive integer.");
-        }
+        isValid(source);
 
-        if (source > 3999) {
-            throw new IllegalArgumentException("Input must be a positive integer less than 3999.");
-        }
-
-        int i = 0;
+        int index = 0;
         StringBuilder stringBuilder = new StringBuilder();
         while (source > 0) {
-            if (source >= DECIMALS[i]) {
-                stringBuilder.append(ROMAN_NUMERALS[i]);
-                source -= DECIMALS[i];
+            if (source >= DECIMALS[index]) {
+                stringBuilder.append(ROMAN_NUMERALS[index]);
+                source -= DECIMALS[index];
             } else {
-                i++;
+                index++;
             }
         }
 
         return stringBuilder.toString();
     }
-}
 
+    /**
+     * Validates the input decimal number.
+     *
+     * @param source the decimal number to be validated
+     * @return true if the input is a valid positive integer less than 4000
+     * @throws IllegalArgumentException if the input is not a valid positive integer less than 4000
+     */
+    @Override
+    public boolean isValid(Integer source) {
+        if (source == null || source <= 0) {
+            throw new IllegalArgumentException("Input must be a positive integer.");
+        }
+
+        if (source >= 4000) {
+            throw new IllegalArgumentException("Input must be a positive integer less than 4000.");
+        }
+
+        return true;
+    }
+}

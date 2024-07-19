@@ -14,24 +14,38 @@ public class BinaryToDecimalConverterImpl implements NumberConverter<String, Int
      */
     @Override
     public Integer convert(String source) {
-        if (source == null || source.isEmpty()) {
-            throw new IllegalArgumentException("Input cannot be null or empty.");
-        }
+        isValid(source);
 
         int result = 0;
         int base = 1;
 
         for (int i = source.length() - 1; i >= 0; i--) {
-            char currentChar = source.charAt(i);
-            if (currentChar != '0' && currentChar != '1') {
-                throw new IllegalArgumentException("Input must be a valid binary string.");
-            }
-
-            int last_digit = currentChar - '0';
-            result += last_digit * base;
+            int lastDigit = source.charAt(i) - '0';
+            result += lastDigit * base;
             base *= 2;
         }
 
         return result;
+    }
+
+    /**
+     * Validates the binary string input.
+     *
+     * @param source the binary string to be validated
+     * @throws IllegalArgumentException if the input is null, empty, or not a valid binary string
+     */
+    @Override
+    public boolean isValid(String source) throws IllegalArgumentException {
+        if (source == null || source.isEmpty()) {
+            throw new IllegalArgumentException("Input cannot be null or empty.");
+        }
+
+        for (char currentChar : source.toCharArray()) {
+            if (currentChar != '0' && currentChar != '1') {
+                throw new IllegalArgumentException("Input must be a valid binary string.");
+            }
+        }
+
+        return true;
     }
 }
