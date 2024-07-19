@@ -36,8 +36,12 @@ public class BinaryToDecimalConverterImpl implements NumberConverter<String, Int
      */
     @Override
     public boolean isValid(String source) throws IllegalArgumentException {
-        if (source == null || source.isEmpty()) {
+        if (source == null || source.trim().isEmpty()) {
             throw new IllegalArgumentException("Input cannot be null or empty.");
+        }
+
+        if (source.trim().length() > 31) {
+            throw new IllegalArgumentException("Input length must be less than 32.");
         }
 
         for (char currentChar : source.toCharArray()) {
