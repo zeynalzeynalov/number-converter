@@ -1,6 +1,5 @@
 package org.abc;
 
-
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -8,6 +7,49 @@ import static org.junit.jupiter.api.Assertions.*;
 class DecimalToRomanNumberConverterImplTest {
 
     private final DecimalToRomanNumberConverterImpl decimalToRomanNumberConverter = new DecimalToRomanNumberConverterImpl();
+
+    @Test
+    public void isValid_PositiveAndLessThanMax_True() {
+        boolean actual = decimalToRomanNumberConverter.isValid(123);
+
+        assertEquals(true, actual);
+    }
+
+    @Test
+    void isValid_Zero_ThrowsException() {
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            decimalToRomanNumberConverter.convert(0);
+        });
+
+        String expectedMessage = "Input must be a positive integer.";
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+
+    @Test
+    void isValid_Negative_ThrowsException() {
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            decimalToRomanNumberConverter.convert(-1);
+        });
+
+        String expectedMessage = "Input must be a positive integer.";
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+
+    @Test
+    void isValid_LargerThanMaxLimit_ThrowsException() {
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            decimalToRomanNumberConverter.convert(4000);
+        });
+
+        String expectedMessage = "Input must be a positive integer less than 4000.";
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
 
     @Test
     public void convert_AllRomanNumerals_Correct() {
