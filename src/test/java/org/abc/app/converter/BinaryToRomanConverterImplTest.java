@@ -1,6 +1,5 @@
 package org.abc.app.converter;
 
-import org.abc.app.converter.BinaryToRomanConverterImpl;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
