@@ -3,10 +3,7 @@ package org.abc.app.numberconverter;
 import lombok.RequiredArgsConstructor;
 import org.abc.app.core.RestResponse;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import static org.abc.app.core.RestResponse.FAIL;
 
@@ -17,14 +14,18 @@ public class NumberConverterController {
 
     private final NumberConverterService numberConverterService;
 
+    @GetMapping("/status")
+    ResponseEntity<RestResponse> checkStatus() {
+
+        return ResponseEntity.ok(new RestResponse("API is running."));
+    }
+
     @PostMapping("decimaltoroman")
     public ResponseEntity<RestResponse> convertDecimalToRoman(
             @RequestBody RequestDecimalToRomanDTO request) {
         try {
-
-            // TODO: call numberConverterService.convert
-
-            return ResponseEntity.ok(new RestResponse());
+            String result = numberConverterService.convertDecimalToRoman(request.input);
+            return ResponseEntity.ok(new RestResponse(result));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(new RestResponse(FAIL, e.getMessage()));
         }
