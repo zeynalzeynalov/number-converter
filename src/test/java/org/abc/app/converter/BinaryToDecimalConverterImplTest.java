@@ -1,17 +1,17 @@
-package org.abc.app.api.converter;
+package org.abc.app.converter;
 
-import org.abc.app.converter.BinaryToRomanConverterImpl;
+import org.abc.app.converter.BinaryToDecimalConverterImpl;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class BinaryToRomanConverterImplTest {
+class BinaryToDecimalConverterImplTest {
 
-    private final BinaryToRomanConverterImpl binaryToRomanConverter = new BinaryToRomanConverterImpl();
+    private final BinaryToDecimalConverterImpl binaryToDecimalConverter = new BinaryToDecimalConverterImpl();
 
     @Test
     public void isValid_Valid_True() {
-        boolean actual = binaryToRomanConverter.isValid("1011011");
+        boolean actual = binaryToDecimalConverter.isValid("1011011");
 
         assertTrue(actual);
     }
@@ -19,7 +19,7 @@ class BinaryToRomanConverterImplTest {
     @Test
     void isValid_Empty_ThrowsException() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            binaryToRomanConverter.convert("");
+            binaryToDecimalConverter.convert("");
         });
 
         String expectedMessage = "Input cannot be null or empty.";
@@ -31,7 +31,7 @@ class BinaryToRomanConverterImplTest {
     @Test
     void isValid_Invalid_ThrowsException() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            binaryToRomanConverter.convert("1a1b0");
+            binaryToDecimalConverter.convert("1a1b0");
         });
 
         String expectedMessage = "Input must be a valid binary string.";
@@ -43,7 +43,7 @@ class BinaryToRomanConverterImplTest {
     @Test
     void isValid_LongerThanMaxLength_ThrowsException() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            binaryToRomanConverter.convert("11111111111111111111111111111111");
+            binaryToDecimalConverter.convert("11111111111111111111111111111111");
         });
 
         String expectedMessage = "Input length must be less than 32.";
@@ -55,7 +55,7 @@ class BinaryToRomanConverterImplTest {
     @Test
     void isValid_StartsWithZero_ThrowsException() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            binaryToRomanConverter.convert("0101");
+            binaryToDecimalConverter.convert("0101");
         });
 
         String expectedMessage = "Input can not start with 0.";
@@ -65,40 +65,30 @@ class BinaryToRomanConverterImplTest {
     }
 
     @Test
-    void convert_Zero_ThrowsException() {
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            binaryToRomanConverter.convert("0");
-        });
+    public void convert_Zero_Correct() {
+        String actual = binaryToDecimalConverter.convert("0");
 
-        String expectedMessage = "Input must be a positive integer less than 4000.";
-        String actualMessage = exception.getMessage();
-
-        assertTrue(actualMessage.contains(expectedMessage));
+        assertEquals("0", actual);
     }
 
     @Test
     public void convert_One_Correct() {
-        String actual = binaryToRomanConverter.convert("1");
+        String actual = binaryToDecimalConverter.convert("1");
 
-        assertEquals("I", actual);
+        assertEquals("1", actual);
     }
 
     @Test
     public void convert_LongBinary_Correct() {
-        String actual = binaryToRomanConverter.convert("101010101010");
+        String actual = binaryToDecimalConverter.convert("101010101010");
 
-        assertEquals("MMDCCXXX", actual);
+        assertEquals("2730", actual);
     }
 
     @Test
     public void convert_LongestBinary_Correct() {
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            binaryToRomanConverter.convert("1111111111111111111111111111111");
-        });
+        String actual = binaryToDecimalConverter.convert("1111111111111111111111111111111");
 
-        String expectedMessage = "Input must be a positive integer less than 4000.";
-        String actualMessage = exception.getMessage();
-
-        assertTrue(actualMessage.contains(expectedMessage));
+        assertEquals(String.valueOf(Integer.MAX_VALUE), actual);
     }
 }
