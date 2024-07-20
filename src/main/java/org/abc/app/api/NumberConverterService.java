@@ -26,19 +26,20 @@ public class NumberConverterService {
      * @throws IllegalArgumentException if the converter type is unknown or the input is invalid
      */
     public String convert(RequestConvert request) {
+        Optional<NumberConverter> numberConverter;
+        String error = String.format("Converter type %s not found.", request.getType());
+
         try {
             NumberConverterTypeEnum numberConverterTypeEnum = NumberConverterTypeEnum.valueOf(request.getType().toUpperCase());
-            Optional<NumberConverter> numberConverter = numberConverterManager.getConverter(numberConverterTypeEnum);
+            numberConverter = numberConverterManager.getConverter(numberConverterTypeEnum);
 
-            if (numberConverter.isPresent()) {
-                return numberConverter.get().convert(request.getInput());
-            } else {
-                throw new IllegalArgumentException("Converter not found for type: " + request.getType());
+            if (numberConverter.isEmpty()) {
+                throw new IllegalArgumentException(error);
             }
-        } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("Invalid converter type: " + request.getType(), e);
         } catch (Exception e) {
-            throw new IllegalArgumentException("Error during conversion", e);
+            throw new IllegalArgumentException(error);
         }
+
+        return numberConverter.get().convert(request.getInput());
     }
 }
