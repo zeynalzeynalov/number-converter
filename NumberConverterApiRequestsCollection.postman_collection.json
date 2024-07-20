@@ -1,0 +1,231 @@
+{
+	"info": {
+		"_postman_id": "c0cf0220-5ae4-4289-b1fe-2c3fd65d33e4",
+		"name": "NumberConverterApiRequestsCollection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12786737"
+	},
+	"item": [
+		{
+			"name": "Check api status",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BACK_END_URL}}/api/number-converter/status",
+					"host": [
+						"{{BACK_END_URL}}"
+					],
+					"path": [
+						"api",
+						"number-converter",
+						"status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Convert decimal to roman",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"input\": \"3\",\n    \"type\": \"DECIMAL_TO_ROMAN\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BACK_END_URL}}/api/number-converter/convert",
+					"host": [
+						"{{BACK_END_URL}}"
+					],
+					"path": [
+						"api",
+						"number-converter",
+						"convert"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Convert binary to decimal",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"input\": \"10101\",\n    \"type\": \"BINARY_TO_DECIMAL\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BACK_END_URL}}/api/number-converter/convert",
+					"host": [
+						"{{BACK_END_URL}}"
+					],
+					"path": [
+						"api",
+						"number-converter",
+						"convert"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Convert binary to roman",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"input\": \"1010\",\n    \"type\": \"binary_to_roman\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BACK_END_URL}}/api/number-converter/convert",
+					"host": [
+						"{{BACK_END_URL}}"
+					],
+					"path": [
+						"api",
+						"number-converter",
+						"convert"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Convert invalid decimal to roman",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"input\": \"-5\",\n    \"type\": \"DECIMAL_TO_ROMAN\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BACK_END_URL}}/api/number-converter/convert",
+					"host": [
+						"{{BACK_END_URL}}"
+					],
+					"path": [
+						"api",
+						"number-converter",
+						"convert"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Convert invalid binary to decimal",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"input\": \"101023\",\n    \"type\": \"BINARY_TO_DECIMAL\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BACK_END_URL}}/api/number-converter/convert",
+					"host": [
+						"{{BACK_END_URL}}"
+					],
+					"path": [
+						"api",
+						"number-converter",
+						"convert"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Convert inavlid binary to roman",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"input\": \"   1010\",\n    \"type\": \"BINARY_TO_ROMAN\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BACK_END_URL}}/api/number-converter/convert",
+					"host": [
+						"{{BACK_END_URL}}"
+					],
+					"path": [
+						"api",
+						"number-converter",
+						"convert"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Convert invalid converter",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"input\": \"X\",\n    \"type\": \"ROMAN_TO_ENGLISH\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BACK_END_URL}}/api/number-converter/convert",
+					"host": [
+						"{{BACK_END_URL}}"
+					],
+					"path": [
+						"api",
+						"number-converter",
+						"convert"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "BACK_END_URL",
+			"value": "http://localhost:8080"
+		}
+	]
+}
