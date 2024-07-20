@@ -12,7 +12,7 @@ class BinaryToDecimalConverterImplTest {
     public void isValid_Valid_True() {
         boolean actual = binaryToDecimalConverter.isValid("1011011");
 
-        assertEquals(true, actual);
+        assertTrue(actual);
     }
 
     @Test
@@ -65,29 +65,29 @@ class BinaryToDecimalConverterImplTest {
 
     @Test
     public void convert_Zero_Correct() {
-        Integer actual = binaryToDecimalConverter.convert("0");
+        String actual = binaryToDecimalConverter.convert("0");
 
-        assertEquals(0, actual);
+        assertEquals("0", actual);
     }
 
     @Test
     public void convert_One_Correct() {
-        Integer actual = binaryToDecimalConverter.convert("1");
+        String actual = binaryToDecimalConverter.convert("1");
 
-        assertEquals(1, actual);
+        assertEquals("1", actual);
     }
 
     @Test
     public void convert_LongBinary_Correct() {
-        Integer actual = binaryToDecimalConverter.convert("101010101010");
+        String actual = binaryToDecimalConverter.convert("101010101010");
 
-        assertEquals(2730, actual);
+        assertEquals("2730", actual);
     }
 
     @Test
     public void convert_LongestBinary_Correct() {
-        Integer actual = binaryToDecimalConverter.convert("1111111111111111111111111111111");
+        String actual = binaryToDecimalConverter.convert("1111111111111111111111111111111");
 
-        assertEquals(Integer.MAX_VALUE, actual);
+        assertEquals(String.valueOf(Integer.MAX_VALUE), actual);
     }
 }
