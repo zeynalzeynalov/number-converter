@@ -31,4 +31,15 @@ public class NumberConverterController {
         }
     }
 
+    @PostMapping("binarytodecimal")
+    public ResponseEntity<RestResponse> convertBinaryToDecimal(
+            @RequestBody RequestBinaryToDecimalDTO request) {
+        try {
+            Integer result = numberConverterService.convertBinaryToDecimal(request.input);
+            return ResponseEntity.ok(new RestResponse(result));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(new RestResponse(FAIL, e.getMessage()));
+        }
+    }
+
 }

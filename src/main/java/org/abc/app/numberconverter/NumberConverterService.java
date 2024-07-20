@@ -8,8 +8,13 @@ import org.springframework.stereotype.Component;
 public class NumberConverterService {
 
     DecimalToRomanConverterImpl decimalToRomanConverter = new DecimalToRomanConverterImpl();
+    BinaryToDecimalConverterImpl binaryToDecimalConverter = new BinaryToDecimalConverterImpl();
 
     public String convertDecimalToRoman(Integer input) {
         return decimalToRomanConverter.convert(input);
+    }
+
+    public Integer convertBinaryToDecimal(String input) {
+        return binaryToDecimalConverter.convert(input);
     }
 }
