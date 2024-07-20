@@ -1,11 +1,12 @@
-package org.abc.app.numberconverter;
+package org.abc.app.api;
 
 import lombok.RequiredArgsConstructor;
-import org.abc.app.core.RestResponse;
+import org.abc.app.utils.RequestConvert;
+import org.abc.app.utils.RestResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import static org.abc.app.core.RestResponse.FAIL;
+import static org.abc.app.utils.RestResponse.FAIL;
 
 /**
  * REST controller for handling number conversion requests.
@@ -31,11 +32,11 @@ public class NumberConverterController {
     /**
      * Endpoint to convert numbers based on the provided request.
      *
-     * @param request the request DTO containing the conversion parameters
+     * @param request the request containing the conversion parameters
      * @return ResponseEntity containing the conversion result or an error message
      */
     @PostMapping("/convert")
-    public ResponseEntity<RestResponse> convert(@RequestBody RequestConvertDTO request) {
+    public ResponseEntity<RestResponse> convert(@RequestBody RequestConvert request) {
         try {
             String result = numberConverterService.convert(request);
             return ResponseEntity.ok(new RestResponse(result));

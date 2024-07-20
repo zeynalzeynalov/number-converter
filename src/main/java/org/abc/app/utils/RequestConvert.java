@@ -1,4 +1,4 @@
-package org.abc.app.numberconverter;
+package org.abc.app.utils;
 
 import lombok.Data;
 
@@ -6,7 +6,7 @@ import lombok.Data;
  * Data Transfer Object for conversion requests.
  */
 @Data
-public class RequestConvertDTO {
+public class RequestConvert {
     private String input;
     private String type;
 }

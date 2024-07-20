@@ -1,8 +1,10 @@
-package org.abc.app.numberconverter;
+package org.abc.app.api;
 
 import lombok.RequiredArgsConstructor;
-import org.abc.app.core.NumberConverter;
-import org.abc.app.core.NumberConverterTypeEnum;
+import org.abc.app.converter.NumberConverter;
+import org.abc.app.converter.NumberConverterManager;
+import org.abc.app.utils.NumberConverterTypeEnum;
+import org.abc.app.utils.RequestConvert;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -19,11 +21,11 @@ public class NumberConverterService {
     /**
      * Converts a number based on the provided request.
      *
-     * @param request the request DTO containing the input and conversion type
+     * @param request the request containing the input and conversion type
      * @return the result of the conversion
      * @throws IllegalArgumentException if the converter type is unknown or the input is invalid
      */
-    public String convert(RequestConvertDTO request) {
+    public String convert(RequestConvert request) {
         try {
             NumberConverterTypeEnum numberConverterTypeEnum = NumberConverterTypeEnum.valueOf(request.getType().toUpperCase());
             Optional<NumberConverter> numberConverter = numberConverterManager.getConverter(numberConverterTypeEnum);

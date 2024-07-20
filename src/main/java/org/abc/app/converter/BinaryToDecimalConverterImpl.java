@@ -1,6 +1,4 @@
-package org.abc.app.numberconverter;
-
-import org.abc.app.core.NumberConverter;
+package org.abc.app.converter;
 
 /**
  * This class implements the NumberConverter interface to convert binary strings to decimal integers.

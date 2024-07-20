@@ -1,4 +1,4 @@
-package org.abc.app.core;
+package org.abc.app.utils;
 
 import lombok.Builder;
 import lombok.Data;

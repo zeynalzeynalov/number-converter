@@ -1,5 +1,6 @@
-package org.abc.app.numberconverter;
+package org.abc.app.api.converter;
 
+import org.abc.app.converter.BinaryToDecimalConverterImpl;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

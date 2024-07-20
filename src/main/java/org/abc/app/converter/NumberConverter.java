@@ -1,4 +1,4 @@
-package org.abc.app.core;
+package org.abc.app.converter;
 
 /**
  * Interface for converting numbers between different formats.
