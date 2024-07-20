@@ -20,7 +20,7 @@ public class NumberConverterManager {
      * @return an Optional containing the requested NumberConverter implementation, or an empty Optional if no match is found
      */
     public Optional<NumberConverter> getConverter(NumberConverterTypeEnum numberConverterTypeEnum) {
-        NumberConverter numberConverter = null;
+        NumberConverter numberConverter;
 
         // Determine the appropriate NumberConverter implementation based on the type enum
         switch (numberConverterTypeEnum) {
