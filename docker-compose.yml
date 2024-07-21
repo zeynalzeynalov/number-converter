@@ -1,0 +1,22 @@
+services:
+  db:
+    platform: linux/x86_64
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'db_number_converter'
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'BlackHatCat'
+      MYSQL_ROOT_PASSWORD: 'BlackHatCat'
+    ports:
+      # <Port exposed> : <MySQL Port running inside container>
+      - '3306:3306'
+    expose:
+      # Opens port 3306 on the container
+      - '3306'
+      # Where our data will be persisted
+    volumes:
+      - mysql-number-converter:/var/lib/mysql
+# Names our volume
+volumes:
+  mysql-number-converter:
