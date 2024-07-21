@@ -7,6 +7,8 @@ import org.abc.app.utils.RequestConvert;
 import org.abc.app.utils.RestResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import static org.abc.app.utils.RestResponse.FAIL;
 
@@ -14,10 +16,12 @@ import static org.abc.app.utils.RestResponse.FAIL;
  * REST controller for handling number conversion requests.
  */
 @RequestMapping("/api/number-converter")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:8080")
 @RestController
 @RequiredArgsConstructor
 public class NumberConverterController {
+
+    private static final Logger logger = LoggerFactory.getLogger(NumberConverterController.class);
 
     // The service that handles the number conversion logic
     private final NumberConverterService numberConverterService;
@@ -62,7 +66,7 @@ public class NumberConverterController {
      */
     @PostMapping("/convert")
     public ResponseEntity<RestResponse> convert(@RequestBody RequestConvert request) {
-        System.out.println("Call to convert endpoint with: " + request);
+        logger.info("Call to convert endpoint with: {}", request);
 
         Log log = Log.builder().converterType(request.getType()).input(request.getInput())
                 .description(String.format("Conversion of input: %s with converter type: %s",
@@ -70,11 +74,13 @@ public class NumberConverterController {
 
         try {
             String result = numberConverterService.convert(request);
-            logRepository.save(log.toBuilder().isSuccessful(true).result(result).description(log.description + " result: " + result).build());
+            logRepository.save(log.toBuilder().isSuccessful(true).result(result)
+                    .description(log.getDescription() + " result: " + result).build());
 
             return ResponseEntity.ok(new RestResponse(result));
         } catch (Exception e) {
-            logRepository.save(log.toBuilder().isSuccessful(false).result("none").description(log.description + " result: " + e.getMessage()).build());
+            logRepository.save(log.toBuilder().isSuccessful(false).result("none")
+                    .description(log.getDescription() + " result: " + e.getMessage()).build());
 
             return ResponseEntity.badRequest().body(new RestResponse(FAIL, e.getMessage()));
         }
