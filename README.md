@@ -13,6 +13,8 @@
 - MySQL
 - Docker Compose
 
+Folder: source code in root folder
+
 **API endpoints:**
 
 - http://localhost:8080/api/number-converter/status
@@ -28,6 +30,8 @@
 
 - React
 - HTML, JS, CSS
+
+Folder: source code in folder /frontend/
 
 **Homepage:** 
 - http://localhost:8080/
