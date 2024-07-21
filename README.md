@@ -22,7 +22,7 @@ Endpoint: http://localhost:3000/
 - React
 - HTML, JS, CSS
 
-## Starting app
+## Starting the app
 
 **Build the app with shell script:**
 
