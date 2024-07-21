@@ -11,6 +11,11 @@
 - MySQL
 - Docker Compose
 
+### Starting the backend app:
+```
+./start-backend.sh
+```
+
 Endpoint: http://localhost:8080/api/number-converter/status
 
 ## Frontend
@@ -22,25 +27,11 @@ Endpoint: http://localhost:3000/
 - React
 - HTML, JS, CSS
 
-## Starting the app
-
-**Build the app with shell script:**
-
+### Starting the frontend app:
 ```
-./app-build.sh
+./start-frontend.sh
 ```
 
-**Run the app shell script:**
-
-```
-./app-start.sh
-```
-
-**Now you can access both backend and frontend endpoints:**
-
-- Backend: http://localhost:8080/api/number-converter/status
-- Frontend: http://localhost:3000/
-
-**Tools:**
+**Additional tools:**
 
 - Postman - collection file: NumberConverterApiRequestsCollection.postman_collection.json
