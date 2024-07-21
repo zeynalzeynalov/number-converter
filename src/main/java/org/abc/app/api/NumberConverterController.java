@@ -12,6 +12,7 @@ import static org.abc.app.utils.RestResponse.FAIL;
  * REST controller for handling number conversion requests.
  */
 @RequestMapping("/api/number-converter")
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequiredArgsConstructor
 public class NumberConverterController {
