@@ -7,7 +7,10 @@ import org.abc.app.utils.NumberConverterTypeEnum;
 import org.abc.app.utils.RequestConvert;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Service class for handling number conversion logic.
@@ -41,5 +44,11 @@ public class NumberConverterService {
         }
 
         return numberConverter.get().convert(request.getInput());
+    }
+
+    public List<String> getTypes() {
+        return Stream.of(NumberConverterTypeEnum.values())
+                .map(Enum::name)
+                .collect(Collectors.toList());
     }
 }

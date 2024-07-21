@@ -30,6 +30,16 @@ public class NumberConverterController {
     }
 
     /**
+     * Endpoint to get list of converter types.
+     *
+     * @return ResponseEntity containing list of converter types
+     */
+    @GetMapping("/types")
+    public ResponseEntity<RestResponse> getTypes() {
+        return ResponseEntity.ok(new RestResponse(numberConverterService.getTypes()));
+    }
+
+    /**
      * Endpoint to convert numbers based on the provided request.
      *
      * @param request the request containing the conversion parameters
