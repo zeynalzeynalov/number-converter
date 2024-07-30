@@ -1,5 +1,7 @@
 package org.abc.app.converter;
 
+import org.abc.app.utils.NumberConverterTypeEnum;
+
 /**
  * Interface for converting numbers between different formats.
  */
@@ -22,4 +24,6 @@ public interface NumberConverter {
      * @throws IllegalArgumentException if the input is null, empty, or not valid according to specific conversion rules
      */
     boolean isValid(String input) throws IllegalArgumentException;
+
+    NumberConverterTypeEnum getType();
 }

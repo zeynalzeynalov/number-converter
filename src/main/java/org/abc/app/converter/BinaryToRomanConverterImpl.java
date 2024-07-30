@@ -1,8 +1,12 @@
 package org.abc.app.converter;
 
+import org.abc.app.utils.NumberConverterTypeEnum;
+import org.springframework.stereotype.Component;
+
 /**
  * This class implements the NumberConverter interface to convert binary strings to Roman numerals.
  */
+@Component
 public class BinaryToRomanConverterImpl implements NumberConverter {
 
     // Instance of BinaryToDecimalConverterImpl to convert binary to decimal
@@ -34,5 +38,9 @@ public class BinaryToRomanConverterImpl implements NumberConverter {
     public boolean isValid(String input) throws IllegalArgumentException {
         // Validate using the binaryToDecimalConverter's isValid method
         return binaryToDecimalConverter.isValid(input);
+    }
+
+    public NumberConverterTypeEnum getType() {
+        return NumberConverterTypeEnum.BINARY_TO_ROMAN;
     }
 }

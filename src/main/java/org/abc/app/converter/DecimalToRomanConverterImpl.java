@@ -1,8 +1,12 @@
 package org.abc.app.converter;
 
+import org.abc.app.utils.NumberConverterTypeEnum;
+import org.springframework.stereotype.Component;
+
 /**
  * This class implements the NumberConverter interface to convert decimal numbers to Roman numerals.
  */
+@Component
 public class DecimalToRomanConverterImpl implements NumberConverter {
 
     // Arrays for decimal values and their corresponding Roman numeral symbols
@@ -65,5 +69,9 @@ public class DecimalToRomanConverterImpl implements NumberConverter {
         }
 
         return true;
+    }
+
+    public NumberConverterTypeEnum getType() {
+        return NumberConverterTypeEnum.DECIMAL_TO_ROMAN;
     }
 }

@@ -1,8 +1,12 @@
 package org.abc.app.converter;
 
+import org.abc.app.utils.NumberConverterTypeEnum;
+import org.springframework.stereotype.Component;
+
 /**
  * This class implements the NumberConverter interface to convert binary strings to decimal integers.
  */
+@Component
 public class BinaryToDecimalConverterImpl implements NumberConverter {
 
     /**
@@ -60,5 +64,9 @@ public class BinaryToDecimalConverterImpl implements NumberConverter {
         }
 
         return true;
+    }
+
+    public NumberConverterTypeEnum getType() {
+        return NumberConverterTypeEnum.BINARY_TO_DECIMAL;
     }
 }
