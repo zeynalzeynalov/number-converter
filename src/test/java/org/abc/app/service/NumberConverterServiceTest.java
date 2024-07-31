@@ -1,7 +1,6 @@
 package org.abc.app.service;
 
 import org.abc.app.dto.RequestConvert;
-import org.abc.app.service.NumberConverterService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -29,7 +28,7 @@ class NumberConverterServiceTest {
 
     @Test
     void convertRomanToEnglish_shouldThrowIllegalArgumentException() {
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+        InvalidNumberConverterException exception = assertThrows(InvalidNumberConverterException.class, () -> {
             numberConverterService.convert(RequestConvert.builder()
                     .input("V")
                     .type(ROMAN_TO_ENGLISH)

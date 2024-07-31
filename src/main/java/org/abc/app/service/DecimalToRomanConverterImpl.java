@@ -23,9 +23,7 @@ public class DecimalToRomanConverterImpl implements NumberConverter {
      */
     @Override
     public String convert(String input) {
-        if (!isValid(input)) {
-            throw new IllegalArgumentException("Input must be a positive integer less than 4000.");
-        }
+        validateInput(input);
 
         int inputInteger = Integer.parseInt(input);
 
@@ -52,7 +50,7 @@ public class DecimalToRomanConverterImpl implements NumberConverter {
      * @throws IllegalArgumentException if the input is not a valid positive integer less than 4000
      */
     @Override
-    public boolean isValid(String input) {
+    public void validateInput(String input) {
         if (input == null || input.trim().isEmpty()) {
             throw new IllegalArgumentException("Input cannot be null or empty.");
         }
@@ -67,8 +65,6 @@ public class DecimalToRomanConverterImpl implements NumberConverter {
         if (inputInteger <= 0 || inputInteger >= 4000) {
             throw new IllegalArgumentException("Input must be a positive integer less than 4000.");
         }
-
-        return true;
     }
 
     public NumberConverterTypeEnum getType() {

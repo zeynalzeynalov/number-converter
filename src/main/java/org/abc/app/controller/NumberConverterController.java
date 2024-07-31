@@ -1,17 +1,15 @@
 package org.abc.app.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.abc.app.logger.Log;
-import org.abc.app.logger.LogRepository;
 import org.abc.app.dto.RequestConvert;
 import org.abc.app.dto.RestResponse;
+import org.abc.app.logger.Log;
+import org.abc.app.logger.LogRepository;
 import org.abc.app.service.NumberConverterService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import static org.abc.app.dto.RestResponse.FAIL;
 
 /**
  * REST controller for handling number conversion requests.
@@ -73,17 +71,10 @@ public class NumberConverterController {
                 .description(String.format("Conversion of input: %s with service type: %s",
                         request.getInput(), request.getType())).build();
 
-        try {
-            String result = numberConverterService.convert(request);
-            logRepository.save(log.toBuilder().isSuccessful(true).result(result)
-                    .description(log.getDescription() + " result: " + result).build());
+        String result = numberConverterService.convert(request);
+        logRepository.save(log.toBuilder().isSuccessful(true).result(result)
+                .description(log.getDescription() + " result: " + result).build());
 
-            return ResponseEntity.ok(new RestResponse(result));
-        } catch (Exception e) {
-            logRepository.save(log.toBuilder().isSuccessful(false).result("none")
-                    .description(log.getDescription() + " result: " + e.getMessage()).build());
-
-            return ResponseEntity.badRequest().body(new RestResponse(FAIL, e.getMessage()));
-        }
+        return ResponseEntity.ok(new RestResponse(result));
     }
 }

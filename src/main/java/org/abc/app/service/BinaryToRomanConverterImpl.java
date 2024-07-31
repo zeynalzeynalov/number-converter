@@ -35,9 +35,9 @@ public class BinaryToRomanConverterImpl implements NumberConverter {
      * @throws IllegalArgumentException if the input is null or empty
      */
     @Override
-    public boolean isValid(String input) throws IllegalArgumentException {
+    public void validateInput(String input) throws IllegalArgumentException {
         // Validate using the binaryToDecimalConverter's isValid method
-        return binaryToDecimalConverter.isValid(input);
+        binaryToDecimalConverter.validateInput(input);
     }
 
     public NumberConverterTypeEnum getType() {

@@ -23,7 +23,7 @@ public interface NumberConverter {
      * @return true if the input is valid, false otherwise
      * @throws IllegalArgumentException if the input is null, empty, or not valid according to specific conversion rules
      */
-    boolean isValid(String input) throws IllegalArgumentException;
+    void validateInput(String input) throws IllegalArgumentException;
 
     NumberConverterTypeEnum getType();
 }

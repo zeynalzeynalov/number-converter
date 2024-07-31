@@ -1,15 +1,12 @@
 package org.abc.app.service;
 
 import lombok.RequiredArgsConstructor;
-import org.abc.app.service.NumberConverter;
-import org.abc.app.utils.NumberConverterTypeEnum;
 import org.abc.app.dto.RequestConvert;
+import org.abc.app.utils.NumberConverterTypeEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -35,20 +32,16 @@ public class NumberConverterService {
      * @throws IllegalArgumentException if the service type is unknown or the input is invalid
      */
     public String convert(RequestConvert request) {
-        String error = String.format("Converter type %s not found.", request.getType());
+        Optional<NumberConverterTypeEnum> numberConverterTypeEnum =
+                Arrays.stream(NumberConverterTypeEnum.values())
+                        .filter(v -> v.toString().equals(request.getType().toUpperCase()))
+                        .collect(Collectors.toList()).stream().findFirst();
 
-        NumberConverter numberConverter;
-
-        try {
-            NumberConverterTypeEnum numberConverterTypeEnum = NumberConverterTypeEnum.valueOf(request.getType().toUpperCase());
-            numberConverter = numberConverterMap.get(numberConverterTypeEnum);
-
-            if (numberConverter == null) {
-                throw new IllegalArgumentException(error);
-            }
-        } catch (Exception e) {
-            throw new IllegalArgumentException(error);
+        if (numberConverterTypeEnum.isEmpty()) {
+            throw new InvalidNumberConverterException(String.format("Converter type %s not found.", request.getType()));
         }
+
+        NumberConverter numberConverter = numberConverterMap.get(numberConverterTypeEnum.get());
 
         return numberConverter.convert(request.getInput());
     }

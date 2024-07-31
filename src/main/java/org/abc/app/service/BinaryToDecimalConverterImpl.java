@@ -19,9 +19,7 @@ public class BinaryToDecimalConverterImpl implements NumberConverter {
     @Override
     public String convert(String input) {
         // Validate the input before conversion
-        if (!isValid(input)) {
-            throw new IllegalArgumentException("Input must be a valid binary string.");
-        }
+        validateInput(input);
 
         int result = 0;
         int base = 1;
@@ -44,7 +42,7 @@ public class BinaryToDecimalConverterImpl implements NumberConverter {
      * @throws IllegalArgumentException if the input is null or empty
      */
     @Override
-    public boolean isValid(String input) throws IllegalArgumentException {
+    public void validateInput(String input) throws IllegalArgumentException {
         if (input == null || input.trim().isEmpty()) {
             throw new IllegalArgumentException("Input cannot be null or empty.");
         }
@@ -55,15 +53,13 @@ public class BinaryToDecimalConverterImpl implements NumberConverter {
 
         for (char currentChar : input.toCharArray()) {
             if (currentChar != '0' && currentChar != '1') {
-                return false;
+                throw new IllegalArgumentException("Input must be a valid binary string with only 1 and 0 chars.");
             }
         }
 
         if (input.length() > 1 && input.charAt(0) == '0') {
             throw new IllegalArgumentException("Input can not start with 0.");
         }
-
-        return true;
     }
 
     public NumberConverterTypeEnum getType() {
