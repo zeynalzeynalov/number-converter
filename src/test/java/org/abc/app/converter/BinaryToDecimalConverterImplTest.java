@@ -1,93 +1,89 @@
 package org.abc.app.converter;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@SpringBootTest
 class BinaryToDecimalConverterImplTest {
 
-    private final BinaryToDecimalConverterImpl binaryToDecimalConverter = new BinaryToDecimalConverterImpl();
+    private static final String VALID_BINARY = "1011011";
+    private static final String INVALID_BINARY = "1a1b0";
+    private static final String TOO_LONG_BINARY = "11111111111111111111111111111111";
+    private static final String LEADING_ZERO_BINARY = "0101";
+    private static final String EMPTY_BINARY = "";
+    private static final String MAX_BINARY = "1111111111111111111111111111111";
+    @Autowired
+    private BinaryToDecimalConverterImpl binaryToDecimalConverter;
 
     @Test
-    public void isValid_Valid_True() {
-        boolean actual = binaryToDecimalConverter.isValid("1011011");
-
-        assertTrue(actual);
+    void isValid_withValidBinary_shouldReturnTrue() {
+        assertTrue(binaryToDecimalConverter.isValid(VALID_BINARY));
     }
 
     @Test
-    void isValid_Empty_ThrowsException() {
+    void convert_withEmptyInput_shouldThrowIllegalArgumentException() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            binaryToDecimalConverter.convert("");
+            binaryToDecimalConverter.convert(EMPTY_BINARY);
         });
 
         String expectedMessage = "Input cannot be null or empty.";
-        String actualMessage = exception.getMessage();
-
-        assertTrue(actualMessage.contains(expectedMessage));
+        assertEquals(expectedMessage, exception.getMessage());
     }
 
     @Test
-    void isValid_Invalid_ThrowsException() {
+    void convert_withInvalidBinary_shouldThrowIllegalArgumentException() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            binaryToDecimalConverter.convert("1a1b0");
+            binaryToDecimalConverter.convert(INVALID_BINARY);
         });
 
         String expectedMessage = "Input must be a valid binary string.";
-        String actualMessage = exception.getMessage();
-
-        assertTrue(actualMessage.contains(expectedMessage));
+        assertEquals(expectedMessage, exception.getMessage());
     }
 
     @Test
-    void isValid_LongerThanMaxLength_ThrowsException() {
+    void convert_withTooLongBinary_shouldThrowIllegalArgumentException() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            binaryToDecimalConverter.convert("11111111111111111111111111111111");
+            binaryToDecimalConverter.convert(TOO_LONG_BINARY);
         });
 
         String expectedMessage = "Input length must be less than 32.";
-        String actualMessage = exception.getMessage();
-
-        assertTrue(actualMessage.contains(expectedMessage));
+        assertEquals(expectedMessage, exception.getMessage());
     }
 
     @Test
-    void isValid_StartsWithZero_ThrowsException() {
+    void convert_withLeadingZeroBinary_shouldThrowIllegalArgumentException() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            binaryToDecimalConverter.convert("0101");
+            binaryToDecimalConverter.convert(LEADING_ZERO_BINARY);
         });
 
         String expectedMessage = "Input can not start with 0.";
-        String actualMessage = exception.getMessage();
-
-        assertTrue(actualMessage.contains(expectedMessage));
+        assertEquals(expectedMessage, exception.getMessage());
     }
 
     @Test
-    public void convert_Zero_Correct() {
+    void convert_withZeroBinary_shouldReturnZero() {
         String actual = binaryToDecimalConverter.convert("0");
-
         assertEquals("0", actual);
     }
 
     @Test
-    public void convert_One_Correct() {
+    void convert_withOneBinary_shouldReturnOne() {
         String actual = binaryToDecimalConverter.convert("1");
-
         assertEquals("1", actual);
     }
 
     @Test
-    public void convert_LongBinary_Correct() {
+    void convert_withLongBinary_shouldReturnCorrectDecimal() {
         String actual = binaryToDecimalConverter.convert("101010101010");
-
         assertEquals("2730", actual);
     }
 
     @Test
-    public void convert_LongestBinary_Correct() {
-        String actual = binaryToDecimalConverter.convert("1111111111111111111111111111111");
-
+    void convert_withMaxBinary_shouldReturnMaxIntegerValue() {
+        String actual = binaryToDecimalConverter.convert(MAX_BINARY);
         assertEquals(String.valueOf(Integer.MAX_VALUE), actual);
     }
 }

@@ -1,41 +1,41 @@
 package org.abc.app.api;
 
-import org.abc.app.converter.BinaryToDecimalConverterImpl;
-import org.abc.app.converter.BinaryToRomanConverterImpl;
-import org.abc.app.converter.DecimalToRomanConverterImpl;
 import org.abc.app.utils.RequestConvert;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.List;
-
+import static org.abc.app.utils.NumberConverterTypeEnum.DECIMAL_TO_ROMAN;
 import static org.junit.jupiter.api.Assertions.*;
 
+@SpringBootTest
 class NumberConverterServiceTest {
 
-    DecimalToRomanConverterImpl decimalToRomanConverter = new DecimalToRomanConverterImpl();
-    BinaryToDecimalConverterImpl binaryToDecimalConverter = new BinaryToDecimalConverterImpl();
-    BinaryToRomanConverterImpl binaryToRomanConverter = new BinaryToRomanConverterImpl();
+    private static final String ROMAN_TO_ENGLISH = "ROMAN_TO_ENGLISH";
 
-    NumberConverterService numberConverterService = new NumberConverterService(List.of(
-            decimalToRomanConverter, binaryToDecimalConverter, binaryToRomanConverter
-    ));
+    @Autowired
+    private NumberConverterService numberConverterService;
 
     @Test
-    void convert_DecimalToRoman_Correct() {
-        RequestConvert requestConvert = new RequestConvert("1", "DECIMAL_TO_ROMAN");
-        String actual = numberConverterService.convert(requestConvert);
+    void convertDecimalToRoman_shouldReturnCorrectRomanNumeral() {
+        String actual = numberConverterService.convert(RequestConvert.builder()
+                .input("1")
+                .type(DECIMAL_TO_ROMAN.toString())
+                .build());
 
-        assertEquals(actual, "I");
+        assertEquals("I", actual);
     }
 
     @Test
-    void convert_RomanToEnglish_ThrowsException() {
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            RequestConvert requestConvert = new RequestConvert("1", "ROMAN_TO_ENGLISH");
-            numberConverterService.convert(requestConvert);
+    void convertRomanToEnglish_shouldThrowIllegalArgumentException() {
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            numberConverterService.convert(RequestConvert.builder()
+                    .input("V")
+                    .type(ROMAN_TO_ENGLISH)
+                    .build());
         });
 
-        String expectedMessage = "Converter type ROMAN_TO_ENGLISH not found.";
+        String expectedMessage = "Converter type " + ROMAN_TO_ENGLISH + " not found.";
         String actualMessage = exception.getMessage();
 
         assertTrue(actualMessage.contains(expectedMessage));

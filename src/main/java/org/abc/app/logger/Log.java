@@ -29,5 +29,4 @@ public class Log {
     private Long id;
     @CreationTimestamp
     private Date createdAt = new Date();
-
 }

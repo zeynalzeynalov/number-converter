@@ -7,8 +7,8 @@ import lombok.Data;
  * A class representing the standard structure of a REST response.
  * It contains the status of the response and any associated data.
  */
-@Builder
 @Data
+@Builder
 public class RestResponse {
 
     // Constants representing common response statuses
@@ -40,13 +40,5 @@ public class RestResponse {
     public RestResponse(Object data) {
         this.status = SUCCESS;
         this.data = data;
-    }
-
-    /**
-     * Default constructor for creating a RestResponse with a default success status and no data.
-     */
-    public RestResponse() {
-        this.status = SUCCESS;
-        this.data = null;
     }
 }

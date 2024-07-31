@@ -1,148 +1,96 @@
 package org.abc.app.converter;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@SpringBootTest
 class DecimalToRomanConverterImplTest {
 
-    private final DecimalToRomanConverterImpl decimalToRomanConverter = new DecimalToRomanConverterImpl();
+    private static final String VALID_NUMBER = "123";
+    private static final String ZERO = "0";
+    private static final String NEGATIVE_NUMBER = "-1";
+    private static final String EXCEEDS_MAX_LIMIT = "4000";
+    private static final String MAX_LIMIT = "3999";
+    private static final int[] DECIMALS = DecimalToRomanConverterImpl.DECIMALS;
+    private static final String[] ROMAN_NUMERALS = DecimalToRomanConverterImpl.ROMAN_NUMERALS;
+    @Autowired
+    private DecimalToRomanConverterImpl decimalToRomanConverter;
 
     @Test
-    public void isValid_PositiveAndLessThanMax_True() {
-        boolean actual = decimalToRomanConverter.isValid("123");
-
-        assertTrue(actual);
+    void isValid_withValidPositiveNumber_shouldReturnTrue() {
+        assertTrue(decimalToRomanConverter.isValid(VALID_NUMBER));
     }
 
     @Test
-    void isValid_Zero_ThrowsException() {
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            decimalToRomanConverter.convert("0");
+    void convert_withZero_shouldThrowIllegalArgumentException() {
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            decimalToRomanConverter.convert(ZERO);
         });
 
-        String expectedMessage = "Input must be a positive integer less than 4000.";
-        String actualMessage = exception.getMessage();
-
-        assertTrue(actualMessage.contains(expectedMessage));
+        assertEquals("Input must be a positive integer less than 4000.", exception.getMessage());
     }
 
     @Test
-    void isValid_Negative_ThrowsException() {
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            decimalToRomanConverter.convert("-1");
+    void convert_withNegativeNumber_shouldThrowIllegalArgumentException() {
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            decimalToRomanConverter.convert(NEGATIVE_NUMBER);
         });
 
-        String expectedMessage = "Input must be a positive integer less than 4000.";
-        String actualMessage = exception.getMessage();
-
-        assertTrue(actualMessage.contains(expectedMessage));
+        assertEquals("Input must be a positive integer less than 4000.", exception.getMessage());
     }
 
     @Test
-    void isValid_LargerThanMaxLimit_ThrowsException() {
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            decimalToRomanConverter.convert("4000");
+    void convert_withNumberExceedingMaxLimit_shouldThrowIllegalArgumentException() {
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            decimalToRomanConverter.convert(EXCEEDS_MAX_LIMIT);
         });
 
-        String expectedMessage = "Input must be a positive integer less than 4000.";
-        String actualMessage = exception.getMessage();
-
-        assertTrue(actualMessage.contains(expectedMessage));
+        assertEquals("Input must be a positive integer less than 4000.", exception.getMessage());
     }
 
     @Test
-    public void convert_AllRomanNumerals_Correct() {
-        for (int i = 0; i < DecimalToRomanConverterImpl.DECIMALS.length; i++) {
-            String actual = decimalToRomanConverter.convert(String.valueOf(DecimalToRomanConverterImpl.DECIMALS[i]));
-
-            assertEquals(actual, DecimalToRomanConverterImpl.ROMAN_NUMERALS[i]);
+    void convert_allValidNumbers_shouldReturnCorrectRomanNumerals() {
+        for (int i = 0; i < DECIMALS.length; i++) {
+            String actual = decimalToRomanConverter.convert(String.valueOf(DECIMALS[i]));
+            assertEquals(ROMAN_NUMERALS[i], actual);
         }
     }
 
     @Test
-    public void convert_SingleDigit_Correct() {
-        String actual = decimalToRomanConverter.convert("1");
-
-        assertEquals(actual, "I");
+    void convert_withSingleDigit_shouldReturnCorrectRoman() {
+        assertEquals("I", decimalToRomanConverter.convert("1"));
     }
 
     @Test
-    void convert_SingleDigit_Incorrect() {
-        String actual = decimalToRomanConverter.convert("2");
-
-        assertNotEquals(actual, "2");
+    void convert_withSpecialSingleDigitDecimal_shouldReturnCorrectRoman() {
+        assertEquals("IV", decimalToRomanConverter.convert("4"));
     }
 
     @Test
-    void convert_SingleDigitSpecialDecimal_Correct() {
-        String actual = decimalToRomanConverter.convert("4");
-
-        assertEquals(actual, "IV");
+    void convert_withLongDecimal_shouldReturnCorrectRoman() {
+        assertEquals("MMMDXIV", decimalToRomanConverter.convert("3514"));
     }
 
     @Test
-    void convert_SingleDigitSpecialDecimal_Incorrect() {
-        String actual = decimalToRomanConverter.convert("5");
-
-        assertNotEquals(actual, "IIIII");
+    void convert_withMaxDecimal_shouldReturnCorrectRoman() {
+        assertEquals("MMMCMXCIX", decimalToRomanConverter.convert(MAX_LIMIT));
     }
 
     @Test
-    void convert_LongDecimal_Correct() {
-        String actual = decimalToRomanConverter.convert("3514");
-
-        assertEquals(actual, "MMMDXIV");
+    void convert_withSingleDigit_shouldNotReturnIncorrectRoman() {
+        assertNotEquals("2", decimalToRomanConverter.convert("2"));
     }
 
     @Test
-    void convert_LongDecimal_Incorrect() {
-        String actual = decimalToRomanConverter.convert("3000");
-
-        assertNotEquals(actual, "3000");
+    void convert_withSpecialSingleDigitDecimal_shouldNotReturnIncorrectRoman() {
+        assertNotEquals("IIIII", decimalToRomanConverter.convert("5"));
     }
 
     @Test
-    void convert_MaxDecimal_Correct() {
-        String actual = decimalToRomanConverter.convert("3999");
-
-        assertEquals(actual, "MMMCMXCIX");
+    void convert_withLongDecimal_shouldNotReturnIncorrectRoman() {
+        assertNotEquals("3000", decimalToRomanConverter.convert("3000"));
     }
-
-    @Test
-    void convert_Zero_ThrowsException() {
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            decimalToRomanConverter.convert("0");
-        });
-
-        String expectedMessage = "Input must be a positive integer less than 4000.";
-        String actualMessage = exception.getMessage();
-
-        assertTrue(actualMessage.contains(expectedMessage));
-    }
-
-    @Test
-    void convert_NegativeDecimal_ThrowsException() {
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            decimalToRomanConverter.convert("-1");
-        });
-
-        String expectedMessage = "Input must be a positive integer less than 4000.";
-        String actualMessage = exception.getMessage();
-
-        assertTrue(actualMessage.contains(expectedMessage));
-    }
-
-    @Test
-    void convert_MaxDecimal_ThrowsException() {
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            decimalToRomanConverter.convert("4000");
-        });
-
-        String expectedMessage = "Input must be a positive integer less than 4000.";
-        String actualMessage = exception.getMessage();
-
-        assertTrue(actualMessage.contains(expectedMessage));
-    }
-
 }
