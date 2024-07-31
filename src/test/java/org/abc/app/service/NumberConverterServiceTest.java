@@ -1,6 +1,7 @@
-package org.abc.app.api;
+package org.abc.app.service;
 
-import org.abc.app.utils.RequestConvert;
+import org.abc.app.dto.RequestConvert;
+import org.abc.app.service.NumberConverterService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -1,16 +1,17 @@
-package org.abc.app.api;
+package org.abc.app.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.abc.app.logger.Log;
 import org.abc.app.logger.LogRepository;
-import org.abc.app.utils.RequestConvert;
-import org.abc.app.utils.RestResponse;
+import org.abc.app.dto.RequestConvert;
+import org.abc.app.dto.RestResponse;
+import org.abc.app.service.NumberConverterService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import static org.abc.app.utils.RestResponse.FAIL;
+import static org.abc.app.dto.RestResponse.FAIL;
 
 /**
  * REST controller for handling number conversion requests.
@@ -39,9 +40,9 @@ public class NumberConverterController {
     }
 
     /**
-     * Endpoint to get list of converter types.
+     * Endpoint to get list of service types.
      *
-     * @return ResponseEntity containing list of converter types
+     * @return ResponseEntity containing list of service types
      */
     @GetMapping("/types")
     public ResponseEntity<RestResponse> getTypes() {
@@ -69,7 +70,7 @@ public class NumberConverterController {
         logger.info("Call to convert endpoint with: {}", request);
 
         Log log = Log.builder().converterType(request.getType()).input(request.getInput())
-                .description(String.format("Conversion of input: %s with converter type: %s",
+                .description(String.format("Conversion of input: %s with service type: %s",
                         request.getInput(), request.getType())).build();
 
         try {

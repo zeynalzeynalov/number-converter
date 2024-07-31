@@ -1,4 +1,4 @@
-package org.abc.app.utils;
+package org.abc.app.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

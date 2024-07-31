@@ -1,9 +1,9 @@
-package org.abc.app.api;
+package org.abc.app.service;
 
 import lombok.RequiredArgsConstructor;
-import org.abc.app.converter.NumberConverter;
+import org.abc.app.service.NumberConverter;
 import org.abc.app.utils.NumberConverterTypeEnum;
-import org.abc.app.utils.RequestConvert;
+import org.abc.app.dto.RequestConvert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,7 +32,7 @@ public class NumberConverterService {
      *
      * @param request the request containing the input and conversion type
      * @return the result of the conversion
-     * @throws IllegalArgumentException if the converter type is unknown or the input is invalid
+     * @throws IllegalArgumentException if the service type is unknown or the input is invalid
      */
     public String convert(RequestConvert request) {
         String error = String.format("Converter type %s not found.", request.getType());
