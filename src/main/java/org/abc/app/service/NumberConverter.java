@@ -1,7 +1,5 @@
 package org.abc.app.service;
 
-import org.abc.app.utils.NumberConverterTypeEnum;
-
 /**
  * Interface for converting numbers between different formats.
  */
@@ -25,5 +23,5 @@ public interface NumberConverter {
      */
     void validateInput(String input) throws IllegalArgumentException;
 
-    NumberConverterTypeEnum getType();
+    String getType();
 }

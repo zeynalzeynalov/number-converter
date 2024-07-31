@@ -1,6 +1,5 @@
 package org.abc.app.service;
 
-import org.abc.app.utils.NumberConverterTypeEnum;
 import org.springframework.stereotype.Component;
 
 /**
@@ -40,7 +39,7 @@ public class BinaryToRomanConverterImpl implements NumberConverter {
         binaryToDecimalConverter.validateInput(input);
     }
 
-    public NumberConverterTypeEnum getType() {
-        return NumberConverterTypeEnum.BINARY_TO_ROMAN;
+    public String getType() {
+        return "BINARY_TO_ROMAN";
     }
 }

@@ -1,6 +1,5 @@
 package org.abc.app.service;
 
-import org.abc.app.utils.NumberConverterTypeEnum;
 import org.springframework.stereotype.Component;
 
 /**
@@ -67,7 +66,7 @@ public class DecimalToRomanConverterImpl implements NumberConverter {
         }
     }
 
-    public NumberConverterTypeEnum getType() {
-        return NumberConverterTypeEnum.DECIMAL_TO_ROMAN;
+    public String getType() {
+        return "DECIMAL_TO_ROMAN";
     }
 }

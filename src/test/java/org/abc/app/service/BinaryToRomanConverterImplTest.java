@@ -4,20 +4,13 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import static org.abc.app.common.Constants.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
 class BinaryToRomanConverterImplTest {
 
-    private static final String VALID_BINARY = "1011011";
-    private static final String EMPTY_BINARY = "";
-    private static final String INVALID_BINARY = "1a1b0";
-    private static final String TOO_LONG_BINARY = "11111111111111111111111111111111";
-    private static final String LEADING_ZERO_BINARY = "0101";
-    private static final String ZERO_BINARY = "0";
-    private static final String LONG_BINARY = "101010101010";
-    private static final String MAX_BINARY = "1111111111111111111111111111111";
     @Autowired
     private BinaryToRomanConverterImpl binaryToRomanConverter;
 
@@ -28,45 +21,35 @@ class BinaryToRomanConverterImplTest {
 
     @Test
     void convert_withEmptyInput_shouldThrowIllegalArgumentException() {
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            binaryToRomanConverter.convert(EMPTY_BINARY);
-        });
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> binaryToRomanConverter.convert(EMPTY_BINARY));
 
         assertEquals("Input cannot be null or empty.", exception.getMessage());
     }
 
     @Test
     void convert_withInvalidBinary_shouldThrowIllegalArgumentException() {
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            binaryToRomanConverter.convert(INVALID_BINARY);
-        });
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> binaryToRomanConverter.convert(INVALID_BINARY));
 
         assertEquals("Input must be a valid binary string with only 1 and 0 chars.", exception.getMessage());
     }
 
     @Test
     void convert_withTooLongBinary_shouldThrowIllegalArgumentException() {
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            binaryToRomanConverter.convert(TOO_LONG_BINARY);
-        });
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> binaryToRomanConverter.convert(TOO_LONG_BINARY));
 
         assertEquals("Input length must be less than 32.", exception.getMessage());
     }
 
     @Test
     void convert_withLeadingZeroBinary_shouldThrowIllegalArgumentException() {
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            binaryToRomanConverter.convert(LEADING_ZERO_BINARY);
-        });
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> binaryToRomanConverter.convert(LEADING_ZERO_BINARY));
 
         assertEquals("Input can not start with 0.", exception.getMessage());
     }
 
     @Test
     void convert_withZeroBinary_shouldThrowIllegalArgumentException() {
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            binaryToRomanConverter.convert(ZERO_BINARY);
-        });
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> binaryToRomanConverter.convert(ZERO_BINARY));
 
         assertEquals("Input must be a positive integer less than 4000.", exception.getMessage());
     }
@@ -85,9 +68,7 @@ class BinaryToRomanConverterImplTest {
 
     @Test
     void convert_withMaxBinary_shouldThrowIllegalArgumentException() {
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            binaryToRomanConverter.convert(MAX_BINARY);
-        });
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> binaryToRomanConverter.convert(MAX_BINARY));
 
         assertEquals("Input must be a positive integer less than 4000.", exception.getMessage());
     }

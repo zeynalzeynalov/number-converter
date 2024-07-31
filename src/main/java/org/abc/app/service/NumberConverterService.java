@@ -2,22 +2,24 @@ package org.abc.app.service;
 
 import lombok.RequiredArgsConstructor;
 import org.abc.app.dto.RequestConvert;
-import org.abc.app.utils.NumberConverterTypeEnum;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Service class for handling number conversion logic.
  */
 @Service
 @RequiredArgsConstructor
+@PropertySource("classpath:converter.properties")
 public class NumberConverterService {
 
-    private final Map<NumberConverterTypeEnum, NumberConverter> numberConverterMap = new HashMap<>();
+    private final Map<String, NumberConverter> numberConverterMap = new HashMap<>();
 
     @Autowired
     public NumberConverterService(List<NumberConverter> numberConverterList) {
@@ -32,21 +34,16 @@ public class NumberConverterService {
      * @throws IllegalArgumentException if the service type is unknown or the input is invalid
      */
     public String convert(RequestConvert request) {
-        Optional<NumberConverterTypeEnum> numberConverterTypeEnum =
-                Arrays.stream(NumberConverterTypeEnum.values())
-                        .filter(v -> v.toString().equals(request.getType().toUpperCase()))
-                        .collect(Collectors.toList()).stream().findFirst();
-
-        if (numberConverterTypeEnum.isEmpty()) {
+        if (!numberConverterMap.containsKey(request.getType())) {
             throw new InvalidNumberConverterException(String.format("Converter type %s not found.", request.getType()));
         }
 
-        NumberConverter numberConverter = numberConverterMap.get(numberConverterTypeEnum.get());
+        NumberConverter numberConverter = numberConverterMap.get(request.getType());
 
         return numberConverter.convert(request.getInput());
     }
 
-    public List<String> getTypes() {
-        return Stream.of(NumberConverterTypeEnum.values()).map(Enum::name).collect(Collectors.toList());
+    public Set<String> getTypes() {
+        return numberConverterMap.keySet();
     }
 }

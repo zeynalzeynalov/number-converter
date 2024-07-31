@@ -4,16 +4,12 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import static org.abc.app.common.Constants.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class DecimalToRomanConverterImplTest {
 
-    private static final String VALID_NUMBER = "123";
-    private static final String ZERO = "0";
-    private static final String NEGATIVE_NUMBER = "-1";
-    private static final String EXCEEDS_MAX_LIMIT = "4000";
-    private static final String MAX_LIMIT = "3999";
     private static final int[] DECIMALS = DecimalToRomanConverterImpl.DECIMALS;
     private static final String[] ROMAN_NUMERALS = DecimalToRomanConverterImpl.ROMAN_NUMERALS;
     @Autowired
@@ -26,27 +22,21 @@ class DecimalToRomanConverterImplTest {
 
     @Test
     void convert_withZero_shouldThrowIllegalArgumentException() {
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            decimalToRomanConverter.convert(ZERO);
-        });
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> decimalToRomanConverter.convert(ZERO_BINARY));
 
         assertEquals("Input must be a positive integer less than 4000.", exception.getMessage());
     }
 
     @Test
     void convert_withNegativeNumber_shouldThrowIllegalArgumentException() {
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            decimalToRomanConverter.convert(NEGATIVE_NUMBER);
-        });
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> decimalToRomanConverter.convert(NEGATIVE_NUMBER));
 
         assertEquals("Input must be a positive integer less than 4000.", exception.getMessage());
     }
 
     @Test
     void convert_withNumberExceedingMaxLimit_shouldThrowIllegalArgumentException() {
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            decimalToRomanConverter.convert(EXCEEDS_MAX_LIMIT);
-        });
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> decimalToRomanConverter.convert(EXCEEDS_MAX_LIMIT));
 
         assertEquals("Input must be a positive integer less than 4000.", exception.getMessage());
     }

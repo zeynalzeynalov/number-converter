@@ -1,6 +1,5 @@
 package org.abc.app.service;
 
-import org.abc.app.utils.NumberConverterTypeEnum;
 import org.springframework.stereotype.Component;
 
 /**
@@ -62,7 +61,7 @@ public class BinaryToDecimalConverterImpl implements NumberConverter {
         }
     }
 
-    public NumberConverterTypeEnum getType() {
-        return NumberConverterTypeEnum.BINARY_TO_DECIMAL;
+    public String getType() {
+        return "BINARY_TO_DECIMAL";
     }
 }
