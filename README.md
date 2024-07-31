@@ -1,4 +1,4 @@
-# Coding challenge - Number converter app
+# Number converter app
 
 -----
 
