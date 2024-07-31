@@ -66,6 +66,7 @@ public class DecimalToRomanConverterImpl implements NumberConverter {
         }
     }
 
+    @Override
     public String getType() {
         return "DECIMAL_TO_ROMAN";
     }

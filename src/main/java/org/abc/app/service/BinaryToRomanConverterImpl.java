@@ -39,6 +39,7 @@ public class BinaryToRomanConverterImpl implements NumberConverter {
         binaryToDecimalConverter.validateInput(input);
     }
 
+    @Override
     public String getType() {
         return "BINARY_TO_ROMAN";
     }

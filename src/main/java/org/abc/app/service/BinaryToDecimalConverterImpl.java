@@ -61,6 +61,7 @@ public class BinaryToDecimalConverterImpl implements NumberConverter {
         }
     }
 
+    @Override
     public String getType() {
         return "BINARY_TO_DECIMAL";
     }
