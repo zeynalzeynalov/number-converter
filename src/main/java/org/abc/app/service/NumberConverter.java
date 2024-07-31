@@ -18,7 +18,6 @@ public interface NumberConverter {
      * Validates the input number.
      *
      * @param input the number to be validated, as a string
-     * @return true if the input is valid, false otherwise
      * @throws IllegalArgumentException if the input is null, empty, or not valid according to specific conversion rules
      */
     void validateInput(String input) throws IllegalArgumentException;

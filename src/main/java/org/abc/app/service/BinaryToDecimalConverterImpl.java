@@ -37,7 +37,6 @@ public class BinaryToDecimalConverterImpl implements NumberConverter {
      * Validates the binary string input.
      *
      * @param input the binary string to be validated
-     * @return true if the input is a valid binary string, false otherwise
      * @throws IllegalArgumentException if the input is null or empty
      */
     @Override

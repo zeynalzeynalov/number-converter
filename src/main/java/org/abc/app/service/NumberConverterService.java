@@ -3,7 +3,6 @@ package org.abc.app.service;
 import lombok.RequiredArgsConstructor;
 import org.abc.app.dto.RequestConvert;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -16,7 +15,6 @@ import java.util.Set;
  */
 @Service
 @RequiredArgsConstructor
-@PropertySource("classpath:converter.properties")
 public class NumberConverterService {
 
     private final Map<String, NumberConverter> numberConverterMap = new HashMap<>();
@@ -38,9 +36,7 @@ public class NumberConverterService {
             throw new InvalidNumberConverterException(String.format("Converter type %s not found.", request.getType()));
         }
 
-        NumberConverter numberConverter = numberConverterMap.get(request.getType());
-
-        return numberConverter.convert(request.getInput());
+        return numberConverterMap.get(request.getType()).convert(request.getInput());
     }
 
     public Set<String> getTypes() {

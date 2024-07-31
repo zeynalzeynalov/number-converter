@@ -16,8 +16,8 @@ class DecimalToRomanConverterImplTest {
     private DecimalToRomanConverterImpl decimalToRomanConverter;
 
     @Test
-    void isValid_withValidPositiveNumber_shouldReturnTrue() {
-        //TODO: assertTrue(decimalToRomanConverter.isValid(VALID_NUMBER));
+    void isValid_withValidPositiveNumber_shouldRun() {
+        decimalToRomanConverter.convert(VALID_NUMBER);
     }
 
     @Test

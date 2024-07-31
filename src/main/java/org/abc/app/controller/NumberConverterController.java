@@ -67,11 +67,12 @@ public class NumberConverterController {
     public ResponseEntity<RestResponse> convert(@RequestBody RequestConvert request) {
         logger.info("Call to convert endpoint with: {}", request);
 
+        String result = numberConverterService.convert(request);
+
         Log log = Log.builder().converterType(request.getType()).input(request.getInput())
                 .description(String.format("Conversion of input: %s with service type: %s",
                         request.getInput(), request.getType())).build();
 
-        String result = numberConverterService.convert(request);
         logRepository.save(log.toBuilder().isSuccessful(true).result(result)
                 .description(log.getDescription() + " result: " + result).build());
 

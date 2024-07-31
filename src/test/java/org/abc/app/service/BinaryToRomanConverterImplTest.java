@@ -15,8 +15,8 @@ class BinaryToRomanConverterImplTest {
     private BinaryToRomanConverterImpl binaryToRomanConverter;
 
     @Test
-    void isValid_withValidBinary_shouldReturnTrue() {
-        //TODO: assertTrue(binaryToRomanConverter.isValid(VALID_BINARY));
+    void isValid_withValidBinary_shouldRun() {
+        binaryToRomanConverter.validateInput(VALID_BINARY);
     }
 
     @Test

@@ -15,8 +15,8 @@ class BinaryToDecimalConverterImplTest {
     private BinaryToDecimalConverterImpl binaryToDecimalConverter;
 
     @Test
-    void isValid_withValidBinary_shouldReturnTrue() {
-        //TODO: assertTrue(binaryToDecimalConverter.isValid(VALID_BINARY));
+    void isValid_withValidBinary_shouldRun() {
+        binaryToDecimalConverter.validateInput(VALID_BINARY);
     }
 
     @Test

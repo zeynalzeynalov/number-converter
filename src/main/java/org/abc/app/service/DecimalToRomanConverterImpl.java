@@ -14,7 +14,7 @@ public class DecimalToRomanConverterImpl implements NumberConverter {
 
     /**
      * Converts a decimal number to its Roman numeral representation.
-     * Reference: https://en.wikipedia.org/wiki/Roman_numerals#Standard_form
+     * Reference: <a href="https://en.wikipedia.org/wiki/Roman_numerals#Standard_form">...</a>
      *
      * @param input the decimal number to be converted
      * @return the Roman numeral representation of the given decimal number
@@ -45,7 +45,6 @@ public class DecimalToRomanConverterImpl implements NumberConverter {
      * Validates the input decimal number.
      *
      * @param input the decimal number to be validated
-     * @return true if the input is a valid positive integer less than 4000
      * @throws IllegalArgumentException if the input is not a valid positive integer less than 4000
      */
     @Override
