@@ -28,7 +28,10 @@ Folder: source code in root folder
 
 **Tech stack:**
 
-- React, HTML, JS, CSS
+- React
+- HTML
+- JS
+- CSS
 
 Folder: source code in folder /frontend/
 
